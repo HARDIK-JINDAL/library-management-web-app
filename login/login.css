@@ -1,0 +1,84 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'EB Garamond', serif;
+  }
+  
+  /* Body */
+  body {
+    background-color: #1E1E1E;
+    color: #E0DCC8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Heading */
+  h1 {
+    font-size: 2.6rem;
+    margin-bottom: 36px;
+    font-weight: 500;
+    color: #E0DCC8;
+  }
+  
+  /* Container */
+  .container {
+    background-color: #2C2C2C;
+    padding: 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Input Fields */
+  .container input[type="text"],
+  .container input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background-color: #3A3A3A;
+    color: #E0DCC8;
+    font-size: 1rem;
+    transition: border 0.3s;
+  }
+  
+  .container input[type="text"]:focus,
+  .container input[type="password"]:focus {
+    border-color: #A49F8C;
+    outline: none;
+  }
+  
+  /* Submit Buttons */
+  .container input[type="submit"] {
+    background-color: #3A3A3A;
+    color: #E0DCC8;
+    border: none;
+    padding: 12px 26px;
+    margin: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  .container input[type="submit"]:hover {
+    background-color: #504F4A;
+    transform: scale(1.03);
+  }
+  
+  /* Error/Status Message */
+  .message {
+    margin-top: 20px;
+    color: #D86C6C;
+    font-size: 0.95rem;
+  }
+  
