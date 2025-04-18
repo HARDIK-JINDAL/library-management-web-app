@@ -56,10 +56,8 @@ Place the project folder inside:```C:\xampp\htdocs\LIBRARY\```
 
 ### Step 3:  Import SQL Schema
 
-- Open phpMyAdmin ```http://localhost/phpmyadmin/```
-- Click Import
 - Select the file: ```C:\xampp\htdocs\LIBRARY\SQL\commands.sql```
-- Click Go
+- execute the commands from the file in MySQL workbench 
 
 This will create the database LibraryManagement with all tables and triggers.
 
