@@ -16,6 +16,8 @@ This is a web-based Library Management System built using **PHP**, **MySQL**, an
 │
 ├── home\                   # Home page UI
 │
+├── resources\              # PNG favicon
+│
 ├── login\                  # Login page UI and logic
 │
 ├── signup\                 # Signup/registration page
