@@ -16,7 +16,7 @@ CREATE TABLE Customer (
     name VARCHAR(100),
     address VARCHAR(255),
     reg_date DATE,
-    book_issued INT,
+    book_issued INT
 );
 
 -- Book Table (include availability and location info)
