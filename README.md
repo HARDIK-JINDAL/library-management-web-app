@@ -62,7 +62,7 @@ Place the project folder inside:```C:\xampp\htdocs\LIBRARY\```
 This will create the database LibraryManagement with all tables and triggers.
 
 ### Step 4:  Configure Database Connection:
-- in the dp.php files , add your credentials
+- in the db.php files , add your credentials
 
 ## 🖥️ Access the App
 Once everything is set:
