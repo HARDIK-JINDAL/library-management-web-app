@@ -1,13 +1,22 @@
 <?php
-include("../database/db.php"); // Make sure to include your database connection
+include("../database/db.php"); // Include your database connection
 
-// Query to get all available books
-$sql_available_books = "SELECT book_id, title, author_name, retail_price, availability FROM Book WHERE availability = 'available'";
+// Query to get available books and calculate title count
+$sql_available_books = "SELECT book_id, title, author_name, retail_price, availability, 
+                                (SELECT COUNT(*) FROM Book b WHERE b.title = Book.title) AS title_count
+                        FROM Book 
+                        WHERE availability = 'available'";
+
 $result_available_books = mysqli_query($conn, $sql_available_books);
+$available_count = mysqli_num_rows($result_available_books); // Count of available books
 
-// Query to get all books (available and borrowed)
-$sql_all_books = "SELECT book_id, title, author_name, retail_price, availability FROM Book";
+// Query to get all books and calculate title count
+$sql_all_books = "SELECT book_id, title, author_name, retail_price, availability, 
+                        (SELECT COUNT(*) FROM Book b WHERE b.title = Book.title) AS title_count
+                  FROM Book";
+
 $result_all_books = mysqli_query($conn, $sql_all_books);
+$all_count = mysqli_num_rows($result_all_books); // Count of all books
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +27,14 @@ $result_all_books = mysqli_query($conn, $sql_all_books);
     <title>Books List</title>
     <link rel="stylesheet" href="../dashboard/css/showBook.css"> 
     <link rel="icon" href="resources/book.png" type="image/png">
-
 </head>
 <body>
 
     <!-- Back Button -->
     <button onclick="window.location.href='dashboard.php';">Back</button>
 
-    <h2>Available Books</h2>
+    <!-- Available Books Table -->
+    <h2>Available Books (<?php echo $available_count; ?>)</h2>
     <table border="1">
         <thead>
             <tr>
@@ -34,12 +43,12 @@ $result_all_books = mysqli_query($conn, $sql_all_books);
                 <th>Author</th>
                 <th>Price</th>
                 <th>Availability</th>
+                <th>Title Count</th> <!-- New column for title count -->
             </tr>
         </thead>
         <tbody>
             <?php
-            // Display available books
-            if (mysqli_num_rows($result_available_books) > 0) {
+            if ($available_count > 0) {
                 while ($row = mysqli_fetch_assoc($result_available_books)) {
                     echo "<tr>
                             <td>{$row['book_id']}</td>
@@ -47,16 +56,18 @@ $result_all_books = mysqli_query($conn, $sql_all_books);
                             <td>{$row['author_name']}</td>
                             <td>{$row['retail_price']}</td>
                             <td>{$row['availability']}</td>
+                            <td>{$row['title_count']}</td> <!-- Show title count -->
                           </tr>";
                 }
             } else {
-                echo "<tr><td colspan='5'>No available books</td></tr>";
+                echo "<tr><td colspan='6'>No available books</td></tr>";
             }
             ?>
         </tbody>
     </table>
 
-    <h2>All Books</h2>
+    <!-- All Books Table -->
+    <h2>All Books (<?php echo $all_count; ?>)</h2>
     <table border="1">
         <thead>
             <tr>
@@ -65,12 +76,12 @@ $result_all_books = mysqli_query($conn, $sql_all_books);
                 <th>Author</th>
                 <th>Price</th>
                 <th>Availability</th>
+                <th>Title Count</th> <!-- New column for title count -->
             </tr>
         </thead>
         <tbody>
             <?php
-            // Display all books
-            if (mysqli_num_rows($result_all_books) > 0) {
+            if ($all_count > 0) {
                 while ($row = mysqli_fetch_assoc($result_all_books)) {
                     echo "<tr>
                             <td>{$row['book_id']}</td>
@@ -78,10 +89,11 @@ $result_all_books = mysqli_query($conn, $sql_all_books);
                             <td>{$row['author_name']}</td>
                             <td>{$row['retail_price']}</td>
                             <td>{$row['availability']}</td>
+                            <td>{$row['title_count']}</td> <!-- Show title count -->
                           </tr>";
                 }
             } else {
-                echo "<tr><td colspan='5'>No books found</td></tr>";
+                echo "<tr><td colspan='6'>No books found</td></tr>";
             }
             ?>
         </tbody>
